@@ -4,11 +4,8 @@ import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Projects from "./pages/Projects";
 import Tasks from "./pages/Tasks";
+import Github from "./pages/Github";
 import AppLayout from "./components/layout/AppLayout";
-
-function GitHub() {
-  return <div>GitHub</div>;
-}
 
 function Assistant() {
   return <div>AI Assistant</div>;
@@ -52,7 +49,7 @@ function App() {
           path="/github"
           element={
             <AppLayout active="github">
-              <GitHub />
+              <Github />
             </AppLayout>
           }
         />
