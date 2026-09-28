@@ -35,3 +35,14 @@ Thumbs.db
 
 # Coverage
 coverage/
+
+# Backend virtual environment
+backend/.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Environment variables
+.env
+.env.*
