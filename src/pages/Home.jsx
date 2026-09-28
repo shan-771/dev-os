@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Home() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#0a0a0a] text-white">
@@ -63,9 +65,12 @@ export default function Home() {
 
           </div>
 
-          <button className="rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-gray-200">
+          <Link
+            to="/dashboard"
+            className="rounded-xl bg-white px-7 py-3.5 text-sm font-semibold !text-black transition hover:bg-gray-200 hover:!text-black"
+          >
             Get Started
-          </button>
+          </Link>
 
         </nav>
 
@@ -91,9 +96,12 @@ export default function Home() {
 
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
 
-            <button className="rounded-xl bg-white px-7 py-3.5 text-sm font-semibold text-black transition hover:bg-gray-200">
-              Get Started
-            </button>
+          <Link
+            to="/dashboard"
+            className="rounded-xl bg-white px-7 py-3.5 text-sm font-semibold !text-black transition hover:bg-gray-200 hover:!text-black"
+          >
+            Get Started
+          </Link>
 
             <a
               href="#product"
