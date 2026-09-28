@@ -75,3 +75,60 @@ async def get_github_pull_requests(username: str):
         }
         for pr in data["items"]
     ]
+
+async def get_github_stats(username: str):
+    async with httpx.AsyncClient() as client:
+
+        profile_url = f"{GITHUB_API}/users/{username}"
+        profile_response = await client.get(profile_url)
+        profile_response.raise_for_status()
+        profile = profile_response.json()
+
+        repos_url = f"{GITHUB_API}/users/{username}/repos"
+        repos_response = await client.get(
+            repos_url,
+            params={"per_page": 100}
+        )
+        repos_response.raise_for_status()
+        repositories = repos_response.json()
+
+        prs_url = f"{GITHUB_API}/search/issues"
+        prs_response = await client.get(
+            prs_url,
+            params={"q": f"author:{username} type:pr"}
+        )
+        prs_response.raise_for_status()
+        prs_data = prs_response.json()
+
+    total_stars = sum(
+        repo["stargazers_count"]
+        for repo in repositories
+    )
+
+    return {
+        "repositories": profile["public_repos"],
+        "stars": total_stars,
+        "pull_requests": prs_data["total_count"],
+    }
+
+async def get_github_activity(username: str):
+    url = f"{GITHUB_API}/users/{username}/events"
+
+    async with httpx.AsyncClient() as client:
+        response = await client.get(
+            url,
+            params={"per_page": 10}
+        )
+
+    response.raise_for_status()
+
+    events = response.json()
+
+    return [
+        {
+            "type": event["type"],
+            "repo": event["repo"]["name"],
+            "created_at": event["created_at"],
+        }
+        for event in events
+    ]

@@ -1,15 +1,27 @@
+import { useEffect, useState } from "react";
+
 export default function GithubStats({ profile }) {
-  const stats = [
-    ["Repositories", profile.public_repos],
-    ["Stars", "—"],
-    ["Pull Requests", "—"],
+  const [stats, setStats] = useState(null);
+
+  useEffect(() => {
+    fetch(`http://127.0.0.1:8000/api/github/stats/${profile.username}`)
+      .then((response) => response.json())
+      .then((data) => setStats(data));
+  }, [profile.username]);
+
+
+  const statItems = [
+    ["Repositories", stats?.repositories ?? "—"],
+    ["Stars", stats?.stars ?? "—"],
+    ["Pull Requests", stats?.pull_requests ?? "—"],
     ["Contributions", "—"],
   ];
+
 
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
 
-      {stats.map(([label, value]) => (
+      {statItems.map(([label, value]) => (
 
         <div
           key={label}

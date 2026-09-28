@@ -57,7 +57,7 @@ export default function Github() {
               <PullRequestSection />
             </div>
 
-            <GithubActivity />
+            <GithubActivity profile={profile} />
           </div>
 
           <div className="h-20" />
