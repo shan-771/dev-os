@@ -1,11 +1,11 @@
-const stats = [
-  ["Repositories", "24"],
-  ["Stars", "128"],
-  ["Pull Requests", "7"],
-  ["Contributions", "342"],
-];
+export default function GithubStats({ profile }) {
+  const stats = [
+    ["Repositories", profile.public_repos],
+    ["Stars", "—"],
+    ["Pull Requests", "—"],
+    ["Contributions", "—"],
+  ];
 
-export default function GithubStats() {
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
 

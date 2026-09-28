@@ -47,3 +47,31 @@ async def get_github_repositories(username: str):
         }
         for repo in repositories
     ]
+
+async def get_github_pull_requests(username: str):
+    url = f"{GITHUB_API}/search/issues"
+
+    params = {
+        "q": f"author:{username} type:pr",
+        "sort": "updated",
+        "order": "desc",
+    }
+
+    async with httpx.AsyncClient() as client:
+        response = await client.get(url, params=params)
+
+    response.raise_for_status()
+
+    data = response.json()
+
+    return [
+        {
+            "title": pr["title"],
+            "url": pr["html_url"],
+            "state": pr["state"],
+            "repository": pr["repository_url"].split("/")[-1],
+            "created_at": pr["created_at"],
+            "updated_at": pr["updated_at"],
+        }
+        for pr in data["items"]
+    ]

@@ -1,4 +1,4 @@
-export default function GithubHeader() {
+export default function GithubHeader({ profile }) {
   return (
     <div className="mb-10">
 
@@ -12,32 +12,37 @@ export default function GithubHeader() {
 
         <div className="flex items-center gap-4">
 
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-white/[0.08] bg-[#18181b] text-xl font-semibold text-gray-300 shadow-[0_10px_30px_rgba(0,0,0,0.2)]">
-            I
-          </div>
+          <img
+            src={profile.avatar_url}
+            alt={profile.username}
+            className="h-16 w-16 rounded-2xl border border-white/[0.08] object-cover shadow-[0_10px_30px_rgba(0,0,0,0.2)]"
+          />
 
           <div>
 
             <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
-              GitHub
+              {profile.name || profile.username}
             </h1>
 
             <p className="mt-2 text-gray-500">
-              @ishan
+              @{profile.username}
             </p>
 
           </div>
 
         </div>
-
-
         {/* Actions */}
 
         <div className="flex gap-3">
 
-          <button className="rounded-xl border border-white/[0.08] bg-[#151517] px-4 py-2.5 text-sm font-medium text-gray-400 shadow-[0_10px_30px_rgba(0,0,0,0.2)] transition hover:border-white/[0.14] hover:text-white">
+          <a
+            href={`https://github.com/${profile.username}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-xl border border-white/[0.08] bg-[#151517] px-4 py-2.5 text-sm font-medium text-gray-400 shadow-[0_10px_30px_rgba(0,0,0,0.2)] transition hover:border-white/[0.14] hover:text-white"
+          >
             View Profile
-          </button>
+          </a>
 
           <button className="rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-black transition hover:bg-gray-200">
             Sync GitHub
@@ -46,6 +51,12 @@ export default function GithubHeader() {
         </div>
 
       </div>
+
+      {profile.bio && (
+        <p className="mt-5 max-w-2xl text-sm leading-6 text-gray-500">
+          {profile.bio}
+        </p>
+      )}
 
     </div>
   );
