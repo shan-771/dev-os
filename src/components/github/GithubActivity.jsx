@@ -1,16 +1,5 @@
-import { useEffect, useState } from "react";
-
-export default function GithubActivity({ profile }) {
-  const [activities, setActivities] = useState([]);
-
-  useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/github/activity/${profile.username}`)
-      .then((response) => response.json())
-      .then((data) => setActivities(data))
-      .catch((error) => {
-        console.error("Failed to fetch GitHub activity:", error);
-      });
-  }, [profile.username]);
+export default function GithubActivity({ activity }) {
+  const activities = activity ?? [];
 
   return (
     <section className="rounded-3xl border border-white/[0.08] bg-[#111113]/95 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.35)] backdrop-blur-xl">

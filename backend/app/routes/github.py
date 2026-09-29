@@ -6,6 +6,7 @@ from app.services.github_service import (
     get_github_pull_requests,
     get_github_stats,
     get_github_activity,
+    get_github_dashboard,
 )
 
 router = APIRouter(prefix="/api/github", tags=["GitHub"])
@@ -31,3 +32,7 @@ async def github_stats(username: str):
 @router.get("/activity/{username}")
 async def github_activity(username: str):
     return await get_github_activity(username)
+
+@router.get("/dashboard/{username}")
+async def github_dashboard(username: str):
+    return await get_github_dashboard(username)
