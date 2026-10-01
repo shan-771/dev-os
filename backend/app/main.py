@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.routes.github import router as github_router
+from app.routes.projects import router as projects_router
+
 
 app = FastAPI(title="Developer OS API")
 
@@ -16,6 +18,7 @@ app.add_middleware(
 
 
 app.include_router(github_router)
+app.include_router(projects_router)
 
 
 @app.get("/")

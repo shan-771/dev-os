@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Projects from "./pages/Projects";
+import ProjectExplorer from "./pages/ProjectExplorer";
 import Tasks from "./pages/Tasks";
 import Github from "./pages/Github";
 import AppLayout from "./components/layout/AppLayout";
@@ -32,6 +33,15 @@ function App() {
           element={
             <AppLayout active="projects">
               <Projects />
+            </AppLayout>
+          }
+        />
+
+        <Route
+          path="/projects/:projectId"
+          element={
+            <AppLayout active="projects">
+              <ProjectExplorer />
             </AppLayout>
           }
         />
